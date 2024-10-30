@@ -1,10 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from './prisma.service';
 import { Post, Prisma } from '@prisma/client';
+import { EventEmitter2 } from '@nestjs/event-emitter';
 
 @Injectable()
 export class PostService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    private eventEmitter: EventEmitter2,
+  ) {}
 
   async post(
     postWhereUniqueInput: Prisma.PostWhereUniqueInput,
@@ -21,6 +25,7 @@ export class PostService {
     where?: Prisma.PostWhereInput;
     orderBy?: Prisma.PostOrderByWithRelationInput;
   }): Promise<Post[]> {
+    this.eventEmitter.emit('posts.get', { postName: 'sd' });
     const { skip, take, cursor, where, orderBy } = params;
     return this.prisma.post.findMany({
       skip,

@@ -10,6 +10,12 @@ import { PostEventListenerService } from './post-event-listener/post-event-liste
 @Module({
   imports: [EventEmitterModule.forRoot()],
   controllers: [AppController],
-  providers: [AppService, PostService, UserService, PrismaService, PostEventListenerService],
+  providers: [
+    AppService,
+    PostService,
+    UserService,
+    PrismaService,
+    PostEventListenerService,
+  ],
 })
 export class AppModule {}
