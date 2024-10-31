@@ -10,12 +10,12 @@ import {
 import { UserService } from './user.service';
 import { User as UserModel, Post as PostModel } from '@prisma/client';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
-import { CreatePostCommand } from './posts/commands/create-post.handler';
+import { CreatePostCommand } from './posts/commands/create-post.command';
 import { GetPostByIdQuery } from './posts/queries/get-post-by-id.query';
 import { GetPostsQuery } from './posts/queries/get-posts.query';
-import { UpdatePostCommand } from './posts/commands/update-post.handler';
+import { UpdatePostCommand } from './posts/commands/update-post.command';
 import { GetFilteredPostsQuery } from './posts/queries/get-filtered-posts.query';
-import { DeletePostCommand } from './posts/commands/delete-post.handler';
+import { DeletePostCommand } from './posts/commands/delete-post.command';
 
 @Controller()
 export class AppController {
