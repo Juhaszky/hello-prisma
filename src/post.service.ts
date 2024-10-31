@@ -37,9 +37,11 @@ export class PostService {
   }
 
   async createPost(data: Prisma.PostCreateInput): Promise<Post> {
-    return this.prisma.post.create({
+    const createdPost = await this.prisma.post.create({
       data,
     });
+    this.eventEmitter.emit('post.created', { postId: createdPost.id });
+    return createdPost;
   }
 
   async updatePost(params: {
