@@ -1,21 +1,23 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { PostService } from './post.service';
 import { UserService } from './user.service';
 import { PrismaService } from './prisma.service';
-import { EventEmitterModule } from '@nestjs/event-emitter';
-import { PostEventListenerService } from './post-event-listener/post-event-listener.service';
+import { CqrsModule } from '@nestjs/cqrs';
+import { CreatePostHandler } from './posts/commands/handlers/create-post.handler';
+import { GetPostByIdHandler } from './posts/queries/handlers/get-post-by-id.handler';
+import { GetPostsHandler } from './posts/queries/handlers/get-posts.handler';
 
 @Module({
-  imports: [EventEmitterModule.forRoot()],
+  imports: [CqrsModule],
   controllers: [AppController],
   providers: [
     AppService,
-    PostService,
     UserService,
     PrismaService,
-    PostEventListenerService,
+    CreatePostHandler,
+    GetPostByIdHandler,
+    GetPostsHandler,
   ],
 })
 export class AppModule {}
