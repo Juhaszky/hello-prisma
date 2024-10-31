@@ -7,9 +7,11 @@ import { CqrsModule } from '@nestjs/cqrs';
 import { CreatePostHandler } from './posts/commands/handlers/create-post.handler';
 import { GetPostByIdHandler } from './posts/queries/handlers/get-post-by-id.handler';
 import { GetPostsHandler } from './posts/queries/handlers/get-posts.handler';
+import { EventEmitterModule } from '@nestjs/event-emitter';
+import { PostEventListenerService } from './post-event-listener/post-event-listener.service';
 
 @Module({
-  imports: [CqrsModule],
+  imports: [CqrsModule, EventEmitterModule.forRoot()],
   controllers: [AppController],
   providers: [
     AppService,
@@ -18,6 +20,7 @@ import { GetPostsHandler } from './posts/queries/handlers/get-posts.handler';
     CreatePostHandler,
     GetPostByIdHandler,
     GetPostsHandler,
+    PostEventListenerService,
   ],
 })
 export class AppModule {}
